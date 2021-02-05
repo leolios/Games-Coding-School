@@ -121,6 +121,32 @@ class Users extends Common
     }
 
     /**
+     * @param array|null $params
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function getSettings(array|null $params = null)
+    {
+        if (!isset($_SESSION['user'])) {
+            echo "<script>window.location.href = '/login'</script>";
+        }
+        $user = $_SESSION["user"];
+        parent::setPageTitle($this->lang->getTranslation("settings") . " | " . $user->getUsername());
+        parent::getView(templatePath: "Users/settings.twig", params: $params, navbar: true);
+        return;
+    }
+
+    public function updateLang()
+    {
+        $_SESSION['language'] = $_POST["lang"];
+        $_SESSION["user"]->setLang($_POST["lang"]);
+        $model = new UserModel();
+        $model->update($_SESSION['user']);
+        echo "<script>window.location.href = '/settings'</script>";
+    }
+
+    /**
      * @param string|null $page
      * @param string|null $uuid
      */
@@ -132,6 +158,9 @@ class Users extends Common
                 break;
             case 'register':
                 self::getRegister();
+                break;
+            case 'setting':
+                self::getSettings();
                 break;
             default:
                 self::getProfils($uuid);

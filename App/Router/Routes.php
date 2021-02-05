@@ -60,10 +60,17 @@ class Routes
         $homeController = new Home();
         $userController = new Users();
         $this->router->map('GET', '/', function () use ($homeController) { return $homeController->show(); }, 'Home');
+
         $this->router->map('GET', '/login', function () use ($userController) { return $userController->show("login"); }, 'login');
         $this->router->map('GET', '/register', function () use ($userController) { return $userController->show("register"); }, 'register');
         $this->router->map('GET', '/profil', function () use ($userController) { return $userController->show(); }, 'profils');
         $this->router->map('GET', '/profil/[a:uuid]', function ($uuid) use ($userController) { return $userController->show(uuid: $uuid); }, 'profil');
+        $this->router->map('GET', '/settings', function () use ($userController) { return $userController->show('setting'); }, 'settings');
+        $this->router->map('POST', '/settings/lang', function () use ($userController) { return $userController->updateLang(); }, 'updateLang');
+        $this->router->map('GET', '/logout', function () {
+            session_destroy();
+            echo "<script>window.location.href='/login'</script>";
+        }, 'logout');
 
         $this->router->map('POST', "/register", function () use ($userController) {
             return $userController->postRegister($_POST['username'], $_POST['email'], $_POST['password'], $_POST['password_confirmation']);

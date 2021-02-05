@@ -114,7 +114,7 @@ abstract class DataBaseConnection
             $array[":$key"] = $array[$key];
             unset($array[$key]);
         endforeach;
-        var_dump($sql);
+        $array[":id"] = $OBJECT->getId();
         $update = $this->DB->prepare($sql);
         return $update->execute($array);
     }

@@ -32,6 +32,7 @@ use JetBrains\PhpStorm\Pure;
 class FR extends Language
 {
     const lang = [
+        "lang" => "fr",
         "home" => "accueil",
         "login" => "connexion",
         "register" => "inscription",
@@ -57,7 +58,14 @@ class FR extends Language
         "emailAllreadyUsed" => "Email est déjà utilisé",
         "pseudoAllreadyUsed" => "Nom d'utilisateur déjà utilisé",
         "invalidLogin" => "Nom d'utilisateur, email ou mot de passe incorrect",
-        "connected" => "Vous êtes connecté"
+        "connected" => "Vous êtes connecté",
+        "welcome" => "Bienvenue",
+        "my" => "Mon",
+        "settings" => "paramètre",
+        "logout" => "deconnection",
+        "infoUser" => "Vos Informations",
+        "language" => "langue",
+        "update" => "mise à jour"
     ];
 
     /**
