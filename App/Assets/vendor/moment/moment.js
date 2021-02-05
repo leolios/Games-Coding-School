@@ -2398,7 +2398,7 @@
     // constant that refers to the ISO standard
     hooks.ISO_8601 = function () {};
 
-    // constant that refers to the RFC 2822 form
+    // constant that refers to the RFC 2822 Form
     hooks.RFC_2822 = function () {};
 
     // date from string and format string

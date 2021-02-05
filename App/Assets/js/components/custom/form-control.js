@@ -8,14 +8,14 @@ var FormControl = (function() {
 
 	// Variables
 
-	var $input = $('.form-control');
+	var $input = $('.Form-control');
 
 
 	// Methods
 
 	function init($this) {
 		$this.on('focus blur', function(e) {
-        $(this).parents('.form-group').toggleClass('focused', (e.type === 'focus'));
+        $(this).parents('.Form-group').toggleClass('focused', (e.type === 'focus'));
     }).trigger('blur');
 	}
 

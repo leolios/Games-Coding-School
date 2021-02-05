@@ -778,14 +778,14 @@ var FormControl = (function() {
 
 	// Variables
 
-	var $input = $('.form-control');
+	var $input = $('.Form-control');
 
 
 	// Methods
 
 	function init($this) {
 		$this.on('focus blur', function(e) {
-        $(this).parents('.form-group').toggleClass('focused', (e.type === 'focus'));
+        $(this).parents('.Form-group').toggleClass('focused', (e.type === 'focus'));
     }).trigger('blur');
 	}
 
@@ -1785,7 +1785,7 @@ var noUiSlider = (function() {
 	//
 	// function init($this) {
 	// 	$this.on('focus blur', function(e) {
-  //       $this.parents('.form-group').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
+  //       $this.parents('.Form-group').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
   //   }).trigger('blur');
 	// }
 	//
@@ -2086,11 +2086,11 @@ var Fullcalendar = (function() {
 					className: $('.event-tag input:checked').val()
 				}, true);
 
-				$('.new-event--form')[0].reset();
-				$('.new-event--title').closest('.form-group').removeClass('has-danger');
+				$('.new-event--Form')[0].reset();
+				$('.new-event--title').closest('.Form-group').removeClass('has-danger');
 				$('#new-event').modal('hide');
 			} else {
-				$('.new-event--title').closest('.form-group').addClass('has-danger');
+				$('.new-event--title').closest('.Form-group').addClass('has-danger');
 				$('.new-event--title').focus();
 			}
 		});
@@ -2116,7 +2116,7 @@ var Fullcalendar = (function() {
 					$this.fullCalendar('updateEvent', currentEvent[0]);
 					$('#edit-event').modal('hide');
 				} else {
-					$('.edit-event--title').closest('.form-group').addClass('has-error');
+					$('.edit-event--title').closest('.Form-group').addClass('has-error');
 					$('.edit-event--title').focus();
 				}
 			}

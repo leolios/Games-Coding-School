@@ -1,7 +1,7 @@
 // stylelint-disable selector-no-qualifying-type
 
 //
-// Textual form controls
+// Textual Form controls
 //
 
 .form-control {
@@ -84,7 +84,7 @@ select.form-control {
 //
 
 // For use with horizontal and inline forms, when you need the label (or legend)
-// text to align with the form controls.
+// text to align with the Form controls.
 .col-form-label {
   padding-top: add($input-padding-y, $input-border-width);
   padding-bottom: add($input-padding-y, $input-border-width);
@@ -135,8 +135,8 @@ select.form-control {
 
 // Form control sizing
 //
-// Build on `.form-control` with modifier classes to decrease or increase the
-// height and font-size of form controls.
+// Build on `.Form-control` with modifier classes to decrease or increase the
+// height and font-size of Form controls.
 //
 // Repeated in `_input_group.scss` to avoid Sass extend issues.
 
@@ -185,7 +185,7 @@ textarea.form-control {
 
 // Form grid
 //
-// Special replacement for our grid system's `.row` for tighter form layouts.
+// Special replacement for our grid system's `.row` for tighter Form layouts.
 
 .form-row {
   display: flex;
@@ -230,10 +230,10 @@ textarea.form-control {
 .form-check-inline {
   display: inline-flex;
   align-items: center;
-  padding-left: 0; // Override base .form-check
+  padding-left: 0; // Override base .Form-check
   margin-right: $form-check-inline-margin-x;
 
-  // Undo .form-check-input defaults and add some `margin-right`.
+  // Undo .Form-check-input defaults and add some `margin-right`.
   .form-check-input {
     position: static;
     margin-top: 0;
@@ -245,7 +245,7 @@ textarea.form-control {
 
 // Form validation
 //
-// Provide feedback to users when form field values are valid or invalid. Works
+// Provide feedback to Users when Form field values are valid or invalid. Works
 // primarily for client-side validation via scoped `:invalid` and `:valid`
 // pseudo-classes but also includes `.is-invalid` and `.is-valid` classes for
 // server side validation.
@@ -256,12 +256,12 @@ textarea.form-control {
 
 // Inline forms
 //
-// Make forms appear inline(-block) by adding the `.form-inline` class. Inline
+// Make forms appear inline(-block) by adding the `.Form-inline` class. Inline
 // forms begin stacked on extra small (mobile) devices and then go inline when
 // viewports reach <768px.
 //
-// Requires wrapping inputs and labels with `.form-group` for proper display of
-// default HTML form controls and our custom form controls (e.g., input groups).
+// Requires wrapping inputs and labels with `.Form-group` for proper display of
+// default HTML Form controls and our custom Form controls (e.g., input groups).
 
 .form-inline {
   display: flex;
@@ -293,10 +293,10 @@ textarea.form-control {
       margin-bottom: 0;
     }
 
-    // Allow folks to *not* use `.form-group`
+    // Allow folks to *not* use `.Form-group`
     .form-control {
       display: inline-block;
-      width: auto; // Prevent labels from stacking above inputs in `.form-group`
+      width: auto; // Prevent labels from stacking above inputs in `.Form-group`
       vertical-align: middle;
     }
 
