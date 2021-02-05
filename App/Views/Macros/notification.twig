@@ -1,0 +1,38 @@
+{% macro div(color = "primary", icon = "", message = "") %}
+    <div class="alert alert-{{ color }} alert-dismissible fade show" role="alert">
+        <span class="alert-icon">{{ icon|raw }}</span>
+        <span class="alert-text">{{ message|raw }}</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+{% endmacro %}
+
+{% macro error(message ="") %}
+    {{ _self.div("danger", "<i class=\"fas fa-exclamation-triangle\"></i>", message) }}
+{% endmacro %}
+
+{% macro info(message ="") %}
+    {{ _self.div("info", "<i class=\"ni ni-like-2\"></i>", message) }}
+{% endmacro %}
+
+{% macro notif(message ="") %}
+    {{ _self.div("primary", "<i class=\"ni ni-bell-55\"></i>", message) }}
+{% endmacro %}
+
+{% macro success(message ="") %}
+    {{ _self.div("success", "<i class=\"ni ni-check-bold\"></i>", message) }}
+{% endmacro %}
+
+{% if error is defined %}
+    {{ _self.error(error) }}
+{% endif %}
+{% if info is defined %}
+    {{ _self.info(info) }}
+{% endif %}
+{% if success is defined %}
+    {{ _self.success(success) }}
+{% endif %}
+{% if notif is defined %}
+    {{ _self.notif(notif) }}
+{% endif %}

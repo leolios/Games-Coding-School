@@ -1,0 +1,12 @@
+{% extends "/Layout/Layout.twig" %}
+
+{% block content %}
+    {% set cardHeader = lang.getTranslation("registerForm") %}
+    {% set cardBody = include("Form/register.twig") %}
+    {% set footer = '<a class="btn btn-secondary btn-sm float-right" href="/login">'~ lang.getTranslation("allreadyAccount")|capitalize ~'</a>' %}
+    {% import "Macros/card.twig" as card %}
+    {{ card.div(cardHeader, cardBody, footer, 6) }}
+    {% block script %}
+        <script src="{{ assets }}/js/togglePassword.js"></script>
+    {% endblock %}
+{% endblock %}

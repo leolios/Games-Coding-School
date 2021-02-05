@@ -1,0 +1,17 @@
+{% macro div(header = "", body = "", footer = "", size = 12) %}
+    <div class="row">
+        <div class="col-md-{{ size }} center">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="h3 mb-0">{{ header|capitalize }}</h5>
+                </div>
+                <div class="card-body">
+                    {{ body|raw }}
+                </div>
+                <div class="card-footer">
+                    {{ footer|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
