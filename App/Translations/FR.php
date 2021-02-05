@@ -65,7 +65,13 @@ class FR extends Language
         "logout" => "deconnection",
         "infoUser" => "Vos Informations",
         "language" => "langue",
-        "update" => "mise à jour"
+        "update" => "mise à jour",
+        "level" => "niveaux",
+        "pp" => "photo de profile",
+        "back" => "retour",
+        "to" => "a",
+        "list" => "la liste",
+        "role" => "role"
     ];
 
     /**

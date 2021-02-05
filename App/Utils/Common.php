@@ -41,7 +41,7 @@ use Twig\Loader\FilesystemLoader;
  */
 abstract class Common
 {
-    const ASSETS        = "App/Assets";
+    const ASSETS        = "/App/Assets";
     const TEMPLATE_PATH = "App/Views";
 
 
@@ -82,8 +82,12 @@ abstract class Common
         if (isset($_SESSION['user'])) $params["hashMD5"] = md5(strtolower(trim($_SESSION['user']->getEmail())));
         $params["sidebar"] = $sidebar;
         $params["navbar"] = $navbar;
-        $params["lang"]= self::getLang();
+        $params["lang"] = self::getLang();
         //Load Page
+        $filter = new \Twig\TwigFilter('md5', function (string $string) {
+            return md5($string);
+        });
+        $twig->addFilter($filter);
         $page = $twig->load($templatePath);
 
         //Show Page

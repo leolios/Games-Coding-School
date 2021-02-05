@@ -1,0 +1,54 @@
+{% extends "Layout/Layout.twig" %}
+{% block content %}
+    <div class="card">
+        <!-- Card header -->
+        <div class="card-header border-0">
+            <div class="row">
+                <div class="col-6">
+                    <h3 class="mb-0">{{ lang.getTranslation("profils")|capitalize }}</h3>
+                </div>
+            </div>
+        </div>
+        <!-- Light table -->
+        <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                <tr>
+                    <th>{{ lang.getTranslation("pp") }}</th>
+                    <th>{{ lang.getTranslation("username") }}</th>
+                    <th>{{ lang.getTranslation("level") }}</th>
+                    <th>{{ lang.getTranslation("role") }}</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for profil in profils %}
+                    <tr>
+                        <td class="table-user">
+                            <img src="https://www.gravatar.com/avatar/{{ profil.getEmail()|md5 }}?d=mp"
+                                 class="avatar rounded-circle mr-3">
+                        </td>
+                        <td>
+                            <span class="text-muted">{{ profil.getUsername() }}</span>
+                        </td>
+                        <td>
+                            <span class="font-weight-bold">{{ profil.getLevel() }}</span>
+                        </td>
+                        <td><span class="text-muted">{{ profil.getRole() }}</span></td>
+                        <td class="table-actions">
+                            <a href="/addFriend" class="table-action" data-toggle="tooltip"
+                               data-original-title="Add friend">
+                                <i class="fas fa-user-plus"></i>
+                            </a>
+                            <a href="/profil/{{ profil.getId() }}" class="table-action" data-toggle="tooltip"
+                               data-original-title="See friend">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

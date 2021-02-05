@@ -65,7 +65,13 @@ class EN extends Language
         "logout" => "logout",
         "infoUser" => "Informations",
         "language" => "language",
-        "update" => "update"
+        "update" => "update",
+        "level" => "levels",
+        "pp" => "profil's picture",
+        "back" => "back",
+        "to" => "to",
+        "list" => "the list",
+        "role" => "role"
     ];
 
     /**

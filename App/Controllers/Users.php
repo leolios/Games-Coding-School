@@ -116,7 +116,17 @@ class Users extends Common
      */
     public function getProfils(string|null $uuid = null)
     {
+        $model = new UserModel();
         parent::setPageTitle($this->lang->getTranslation("user") . " | " . $this->lang->getTranslation("profils"));
+        if (!is_null($uuid)) {
+            $model->user_schema->setId($uuid);
+            $profil = $model->getOne($model->user_schema);
+            $pp = md5(strtolower(trim($profil->getEmail())));
+            parent::getView(templatePath: "Users/single.twig", params: ["profil" => $profil, "pp" => $pp], navbar: true);
+        } else {
+            $profils = $model->getAll($model->user_schema);
+            parent::getView(templatePath: "Users/list.twig", params: ["profils" => $profils], navbar: true);
+        }
         return;
     }
 

@@ -64,7 +64,7 @@ class Routes
         $this->router->map('GET', '/login', function () use ($userController) { return $userController->show("login"); }, 'login');
         $this->router->map('GET', '/register', function () use ($userController) { return $userController->show("register"); }, 'register');
         $this->router->map('GET', '/profil', function () use ($userController) { return $userController->show(); }, 'profils');
-        $this->router->map('GET', '/profil/[a:uuid]', function ($uuid) use ($userController) { return $userController->show(uuid: $uuid); }, 'profil');
+        $this->router->map('GET', '/profil/[*:uuid]', function ($uuid) use ($userController) { return $userController->show(uuid: $uuid); }, 'profil');
         $this->router->map('GET', '/settings', function () use ($userController) { return $userController->show('setting'); }, 'settings');
         $this->router->map('POST', '/settings/lang', function () use ($userController) { return $userController->updateLang(); }, 'updateLang');
         $this->router->map('GET', '/logout', function () {

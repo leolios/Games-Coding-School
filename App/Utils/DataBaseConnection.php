@@ -84,8 +84,9 @@ abstract class DataBaseConnection
      */
     function getOne(object $OBJECT): ?object
     {
+        $id = $OBJECT->getId();
         $get = $this->DB->prepare("SELECT * FROM `" . $OBJECT::TABLE_NAME . "` WHERE id=:id;");
-        $get->bindParam(":id", $OBJECT->id, PDO::PARAM_INT);
+        $get->bindParam(":id", $id, PDO::PARAM_INT);
         $get->execute();
         $result = $get->fetchAll(PDO::FETCH_CLASS, get_class($OBJECT));
         return ($result[0]) ? $result[0] : false;
@@ -159,8 +160,9 @@ abstract class DataBaseConnection
      */
     function delete(object $OBJECT): Exception|bool|null
     {
+        $id = $OBJECT->getId();
         $get = $this->DB->prepare("DELETE FROM `" . $OBJECT::TABLE_NAME . "` WHERE `id`=:1;");
-        $get->bindParam(":1", $OBJECT->id, PDO::PARAM_INT);
+        $get->bindParam(":1", $id, PDO::PARAM_INT);
         return $get->execute();
     }
 
