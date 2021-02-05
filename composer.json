@@ -1,0 +1,13 @@
+{
+    "name": "steodec/coding-school",
+    "description": "Project game for learn code",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "steodec",
+            "email": "paul.tedesco@live.fr"
+        }
+    ],
+    "require": {}
+}
