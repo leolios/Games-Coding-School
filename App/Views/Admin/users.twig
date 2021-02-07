@@ -1,0 +1,217 @@
+{% extends 'Layout/Layout.twig' %}
+{% block content %}
+    <div class="card">
+        <!-- Card header -->
+        <div class="card-header border-0">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="mb-0">{{ lang.getTranslation("profils")|capitalize }}
+                        <button class="btn btn-info float-right" data-toggle="modal"
+                                data-target="#modal-create">{{ lang.getTranslation(["register", "user"])|capitalize }}</button>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <!-- Light table -->
+        <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                <tr>
+                    <th>#</th>
+                    <th>{{ lang.getTranslation("pp") }}</th>
+                    <th>{{ lang.getTranslation("username") }}</th>
+                    <th>{{ lang.getTranslation("email") }}</th>
+                    <th>{{ lang.getTranslation("level") }}</th>
+                    <th>{{ lang.getTranslation("role") }}</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for profil in profils|sort((a, b) => a.role <=> b.role) %}
+                    <tr>
+                        <td>
+                            <span class="text-muted">{{ profil.getId()|u.truncate(5) }}</span>
+                        </td>
+                        <td class="table-user">
+                            <img src="https://www.gravatar.com/avatar/{{ profil.getEmail()|md5 }}?d=mp"
+                                 class="avatar rounded-circle mr-3">
+                        </td>
+                        <td>
+                            <span class="text-muted">{{ profil.getUsername() }}</span>
+                        </td>
+                        <td>
+                            <span class="text-muted">{{ profil.email() }}</span>
+                        </td>
+                        <td>
+                            <span class="text-muted">{{ profil.getLevel() }}</span>
+                        </td>
+                        <td><span class="text-muted">{{ profil.getRole()|capitalize }}</span></td>
+                        <td class="table-actions">
+                            <a href="#modal-update"
+                               data-updateusername="{{ profil.getUsername() }}"
+                               data-upaterole="{{ profil.getRole() }}"
+                               data-updateid="{{ profil.getId() }}"
+                               data-updateemail="{{ profil.getEmail() }}"
+                               class="table-action" data-toggle="modal">
+                                <i class="fas fa-user-edit text-blue"></i>
+                            </a>
+                            <a href="#modal-delete" data-deleteid="{{ profil.getId() }}" class="table-action"
+                               data-toggle="modal">
+                                <i class="fas fa-trash text-red"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+{% block modal %}
+    <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="modal-delete"
+         aria-hidden="true">
+        <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+            <div class="modal-content bg-gradient-danger">
+                <div class="modal-header">
+                    <h6 class="modal-title"
+                        id="modal-title-notification">{{ lang.getTranslation("supressItem")|capitalize }}</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="py-3 text-center">
+                        <i class="ni ni-bell-55 ni-3x"></i>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <a href=""
+                       class="btn btn-white text-dark link-delete">{{ lang.getTranslation("confirm")|capitalize }}</a>
+                    <button type="button" class="btn btn-link text-white ml-auto"
+                            data-dismiss="modal">{{ lang.getTranslation("cancel")|capitalize }}</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-create" tabindex="-1" role="dialog" aria-labelledby="modal-create"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title"
+                        id="modal-title-notification">{{ lang.getTranslation(["register", "user"])|capitalize }}</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="py-3 text-center">
+                        {% include "Form/register.twig" %}
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning text-white ml-auto"
+                            data-dismiss="modal">{{ lang.getTranslation("cancel")|capitalize }}</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-update" tabindex="-1" role="dialog" aria-labelledby="modal-update"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title"
+                        id="modal-title-notification">{{ lang.getTranslation(["register", "user"])|capitalize }}</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="py-3 text-center">
+                        <form action="" method="post" class="link-update">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-merge">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            </div>
+                                            <input class="form-control username"
+                                                   placeholder="{{ lang.getTranslation(["username"])|capitalize }}"
+                                                   type="text" name="username" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-merge">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            </div>
+                                            <input class="form-control email"
+                                                   placeholder="{{ lang.getTranslation(["email"])|capitalize }}"
+                                                   type="email" name="email" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label"
+                                               for="role">{{ lang.getTranslation("role") }}</label>
+                                        <select class="form-control role" id="role" name="role">
+                                            <option value="member">Member</option>
+                                            <option value="admin">Admin</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="submit" class="btn btn-success"
+                                           value="{{ lang.getTranslation("update")|capitalize }}">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning text-white ml-auto"
+                            data-dismiss="modal">{{ lang.getTranslation("cancel")|capitalize }}</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+        $('#modal-delete').on('show.bs.modal', function (event) {
+            let button = $(event.relatedTarget)
+            let id = button.data('deleteid')
+            let modal = $(this)
+            modal.find('.link-delete').attr("href", "/admin/users/delete/" + id)
+        })
+        $('#modal-update').on('show.bs.modal', function (event) {
+            let button = $(event.relatedTarget)
+            let email = button.data('updateemail')
+            let username = button.data('updateusername')
+            let role = button.data('upaterole')
+            let id = button.data('updateid')
+            let modal = $(this)
+            console.log(role)
+
+            modal.find('.link-update').attr("action", "/admin/users/update/" + id)
+            modal.find('.username').attr("value", username)
+            modal.find('.email').attr("value", email)
+            modal.find(`.role option[value="${role}"]`).prop('selected', true)
+        })
+    </script>
+{% endblock %}

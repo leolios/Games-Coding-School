@@ -9,7 +9,7 @@
                     </div>
                     <input class="form-control"
                            placeholder="{{ lang.getTranslation(["username", "or", "email"])|capitalize }}" type="text"
-                           name="login" required>
+                            {% if(_post.login is defined) %} value="{{ _post.login }}" {% endif %} name="login" required>
                 </div>
             </div>
         </div>

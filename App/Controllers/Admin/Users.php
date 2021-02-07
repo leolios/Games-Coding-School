@@ -24,46 +24,48 @@
  *
  */
 
-namespace App\Utils;
+namespace App\Controllers\Admin;
 
-/**
- * Class Utils
- * @package App\Utils
- */
-class Utils
+
+use App\Utils\Common;
+use App\Models\Users as UsersModel;
+use App\Utils\Utils;
+
+class Users extends Common
 {
-    /**
-     * @param string $url
-     */
-    public static function redirect(string $url): void
+    public function __construct()
     {
-        echo "<script>window.location.href = '$url'</script>";
+        parent::__construct("Admin");
+    }
+
+    public function show()
+    {
+        $users = new UsersModel();
+        $param["profils"] = $users->getAll($users->user_schema);
+        parent::getView('Admin/users.twig', $param, sidebar: true);
+    }
+
+    public function deleteUser($id)
+    {
+        $users = new UsersModel();
+        $users->user_schema->setId($id);
+        $users->delete($users->user_schema);
+        Utils::redirect("/admin/users");
         return;
     }
 
-    /**
-     * @return bool
-     */
-    public static function isAdmin(): bool
+    public function updateUser(array $form, $uuid)
     {
-        if (self::isConnected()):
-            return ($_SESSION['user']->getRole() == "admin");
-        else:
-            return false;
-        endif;
-    }
+        $users = new UsersModel();
+        $user_schema = $users->user_schema;
+        $user_schema->setId($uuid);
+        $user_schema->setEmail($form["email"]);
+        $user_schema->setRole($form["role"]);
+        $user_schema->setUsername($form["username"]);
 
-    public static function goBack()
-    {
-        echo "window.history.back()";
+        $users->update($user_schema);
+
+        Utils::redirect("/admin/users");
         return;
-    }
-
-    /**
-     * @return bool
-     */
-    public static function isConnected(): bool
-    {
-        return (isset($_SESSION['user']));
     }
 }
