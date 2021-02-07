@@ -144,14 +144,14 @@ end
 #
 ##################
 
-When /^I redirect jekyll(.*)$/ do |args|
+When /^I run jekyll(.*)$/ do |args|
   status = run_jekyll(args)
   if args.include?("--verbose") || ENV['DEBUG']
     puts jekyll_run_output
   end
 end
 
-When /^I redirect bundle(.*)$/ do |args|
+When /^I run bundle(.*)$/ do |args|
   status = run_bundle(args)
   if args.include?("--verbose") || ENV['DEBUG']
     puts jekyll_run_output

@@ -18,7 +18,7 @@ to get a feel for what changes are afoot. Key features:
 2. Gobs of bugfixes and customization.
 3. Uniformity and sanity to Jekyll extensions of Liquid.
 
-To install just redirect:
+To install just run:
 
 {% highlight bash %}
 $ gem install jekyll --pre

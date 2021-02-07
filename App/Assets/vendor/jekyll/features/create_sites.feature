@@ -5,14 +5,14 @@ Feature: Create sites
 
   Scenario: Blank site
     Given I do not have a "test_blank" directory
-    When I redirect jekyll new test_blank --blank
+    When I run jekyll new test_blank --blank
     Then the test_blank/_layouts directory should exist
     And the test_blank/_posts directory should exist
     And the "test_blank/index.html" file should exist
 
   Scenario: Basic site
     Given I have an "index.html" file that contains "Basic Site"
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "Basic Site" in "_site/index.html"
 
@@ -21,7 +21,7 @@ Feature: Create sites
     And I have the following post:
       | title   | date       | content          |
       | Hackers | 2009-03-27 | My First Exploit |
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "My First Exploit" in "_site/2009/03/27/hackers.html"
 
@@ -29,7 +29,7 @@ Feature: Create sites
     Given I have a _layouts directory
     And I have an "index.html" page with layout "default" that contains "Basic Site with Layout"
     And I have a default layout that contains "Page Layout: {{ content }}"
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "Page Layout: Basic Site with Layout" in "_site/index.html"
 
@@ -40,7 +40,7 @@ Feature: Create sites
       | title    | date       | layout  | content                               |
       | Wargames | 2009-03-27 | default | The only winning move is not to play. |
     And I have a default layout that contains "Post Layout: {{ content }}"
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "Post Layout: <p>The only winning move is not to play.</p>" in "_site/2009/03/27/wargames.html"
 
@@ -51,7 +51,7 @@ Feature: Create sites
       | title    | date       | layout      | content                               |
       | Wargames | 2009-03-27 | post/simple | The only winning move is not to play. |
     And I have a post/simple layout that contains "Post Layout: {{ content }}"
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "Post Layout: <p>The only winning move is not to play.</p>" in "_site/2009/03/27/wargames.html"
 
@@ -74,7 +74,7 @@ Feature: Create sites
       | title  | date       | layout | content             |
       | entry3 | 2009-05-27 | post   | content for entry3. |
       | entry4 | 2009-06-27 | post   | content for entry4. |
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "Page : Site contains 2 pages and 4 posts" in "_site/index.html"
     And I should see "No replacement \{\{ site.posts.size \}\}" in "_site/about.html"

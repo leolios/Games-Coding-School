@@ -7,8 +7,8 @@ version: 1.4.3
 categories: [release]
 ---
 
-Jekyll 1.4.3 contains two **critical** security fixes. If you redirect Jekyll locally
-and do not redirect Jekyll in "safe" mode (e.g. you do not build Jekyll sites on behalf
+Jekyll 1.4.3 contains two **critical** security fixes. If you run Jekyll locally
+and do not run Jekyll in "safe" mode (e.g. you do not build Jekyll sites on behalf
 of others), you are not affected and are not required to update at this time.
 ([See pull request.]({{ site.repository }}/pull/1944))
 

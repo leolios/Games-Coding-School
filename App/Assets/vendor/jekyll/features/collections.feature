@@ -7,9 +7,9 @@ Feature: Collections
     Given I have an "index.html" page that contains "Collections: {{ site.methods }}"
     And I have fixture collections
     And I have a configuration file with "collections" set to "['methods']"
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
-    And I should see "Collections: <p>Use <code>Jekyll.configuration</code> to build a full configuration for use w/Jekyll.</p>\n\n<p>Whatever: foo.bar</p>\n<p>Signs are nice</p>\n<p><code>Jekyll.sanitized_path</code> is used to make sure your path is in your source.</p>\n<p>redirect your generators! default</p>\n<p>Page without title.</p>\n<p>redirect your generators! default</p>" in "_site/index.html"
+    And I should see "Collections: <p>Use <code>Jekyll.configuration</code> to build a full configuration for use w/Jekyll.</p>\n\n<p>Whatever: foo.bar</p>\n<p>Signs are nice</p>\n<p><code>Jekyll.sanitized_path</code> is used to make sure your path is in your source.</p>\n<p>run your generators! default</p>\n<p>Page without title.</p>\n<p>run your generators! default</p>" in "_site/index.html"
     And the "_site/methods/configuration.html" file should not exist
 
   Scenario: Rendered collection
@@ -23,7 +23,7 @@ Feature: Collections
         output: true
         foo:   bar
     """
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "Collections: {\"methods" in "_site/index.html"
     And I should see "Methods metadata: bar" in "_site/collection_metadata.html"
@@ -39,7 +39,7 @@ Feature: Collections
         output: true
         permalink: /:collection/:path/
     """
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "<p>Whatever: foo.bar</p>" in "_site/methods/configuration/index.html"
 
@@ -54,10 +54,10 @@ Feature: Collections
         output: true
         foo:   bar
     """
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "Collections: {\"methods" in "_site/index.html"
-    And I should see "<p>redirect your generators! default</p>" in "_site/methods/site/generate.html"
+    And I should see "<p>run your generators! default</p>" in "_site/methods/site/generate.html"
     And I should see "<div class='title'>Tom Preston-Werner</div>" in "_site/methods/site/generate.html"
 
   Scenario: Collections specified as an array
@@ -68,7 +68,7 @@ Feature: Collections
     collections:
     - methods
     """
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "Collections: _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/um_hi.md" in "_site/index.html"
 
@@ -80,7 +80,7 @@ Feature: Collections
     collections:
     - methods
     """
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "Collections: _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/um_hi.md" in "_site/index.html"
 
@@ -92,7 +92,7 @@ Feature: Collections
     collections:
     - methods
     """
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "All documents: _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/um_hi.md" in "_site/index.html"
 
@@ -104,7 +104,7 @@ Feature: Collections
     collections:
     - methods
     """
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "First document's output: <p>Use <code>Jekyll.configuration</code> to build a full configuration for use w/Jekyll.</p>\n\n<p>Whatever: foo.bar</p>" in "_site/index.html"
 
@@ -116,7 +116,7 @@ Feature: Collections
     collections:
     - methods
     """
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "Item count: 2" in "_site/index.html"
 
@@ -128,7 +128,7 @@ Feature: Collections
     collections:
     - methods
     """
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "1. of 7: <p>Page without title.</p>" in "_site/index.html"
 
@@ -140,6 +140,6 @@ Feature: Collections
     collections:
     - methods
     """
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "Collections: Jekyll.configuration, Jekyll.escape, Jekyll.sanitized_path, Site#generate, , Site#generate," in "_site/index.html"

@@ -19,8 +19,8 @@ Here are a few things we think you'll want to know about this release:
   repetition in your templates and to set site specific options without
   changing `_config.yml`.
 
-* You can now redirect `jekyll serve --detach` to boot up a WEBrick server in the
-  background. **Note:** you'll need to redirect `kill [server_pid]` to shut
+* You can now run `jekyll serve --detach` to boot up a WEBrick server in the
+  background. **Note:** you'll need to run `kill [server_pid]` to shut
   the server down. When ran, you'll get a process id that you can use in
   place of `[server_pid]`
 
@@ -38,6 +38,6 @@ Here are a few things we think you'll want to know about this release:
 * Expose the current Jekyll version as the `jekyll.version` Liquid
   variable.
 
-For a full redirect-down, visit our [change log](/docs/history/)!
+For a full run-down, visit our [change log](/docs/history/)!
 
 [arbitrary data]: /docs/datafiles/

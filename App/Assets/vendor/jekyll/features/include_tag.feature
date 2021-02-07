@@ -18,7 +18,7 @@ Feature: Include tags
       | Allow params with spaces and quotes | 2013-04-07 | html | {% include params.html cool="param with spaces" super="\"quoted\"" single='has "quotes"' escaped='\'single\' quotes' %} |
       | Parameter syntax                    | 2013-04-12 | html | {% include params.html param1_or_2="value" %}                                                                           |
       | Pass a variable                     | 2013-06-22 | html | {% assign var = 'some text' %}{% include params.html local=var title=page.title %}                                    |
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "<header>My awesome blog header: myparam</header>" in "_site/2013/03/21/include-files.html"
     And I should not see "myparam" in "_site/2013/03/21/ignore-params-if-unused.html"
@@ -43,7 +43,7 @@ Feature: Include tags
     | include_file1 | snippet.html      |
     | include_file2 | parametrized.html |
     And I have an "index.html" page that contains "{% include {{site.include_file1}} %} that {% include {{site.include_file2}} what='parameters' %}"
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "a snippet that works with parameters" in "_site/index.html"
 
@@ -52,7 +52,7 @@ Feature: Include tags
     And I have an "_includes/one.html" file that contains "one"
     And I have an "_includes/two.html" file that contains "two"
     And I have an "index.html" page with files "[one.html, two.html]" that contains "{% for file in page.files %}{% include {{file}} %} {% endfor %}"
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "one two" in "_site/index.html"
 
@@ -63,7 +63,7 @@ Feature: Include tags
     | key          | value |
     | include_file | one   |
     And I have an "index.html" page that contains "{% include {{ site.include_file | append: '.html' }} %}"
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "one included" in "_site/index.html"
 
@@ -74,6 +74,6 @@ Feature: Include tags
     | key          | value |
     | include_file | one   |
     And I have an "index.html" page that contains "{% include {{ site.include_file }}.html %}"
-    When I redirect jekyll build
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "one included" in "_site/index.html"
