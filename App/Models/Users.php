@@ -66,9 +66,12 @@ class Users extends DataBaseConnection
         $login = $this->DB->prepare("SELECT * FROM `users` WHERE email = :email OR username = :email");
         $login->bindParam(":email", $this->user_schema->email, PDO::PARAM_STR);
         $login->execute();
-        $users = $login->fetchAll(PDO::FETCH_CLASS, get_class($this->user_schema))[0];
-        if (is_null($users)) return "invalidLogin";
-        if (!password_verify($this->user_schema->password, $users->getPassword())) return "invalidLogin";
-        return $users;
+        $users = $login->fetchAll(PDO::FETCH_CLASS, get_class($this->user_schema));
+        if (empty($users)) return "invalidLogin";
+        else {
+            $users = $users[0];
+            if (!password_verify($this->user_schema->password, $users->getPassword())) return "invalidLogin";
+            return $users;
+        }
     }
 }

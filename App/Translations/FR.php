@@ -71,7 +71,9 @@ class FR extends Language
         "back" => "retour",
         "to" => "a",
         "list" => "la liste",
-        "role" => "role"
+        "role" => "role",
+        "homeSubTitle"=>"sur la Games Coding School",
+        "homeTitleParagraphe" => "le site qui va vous apprendre à coder avec différent jeux.<br> Alors qu'es ce que tu attends pour te lancer ?"
     ];
 
     /**

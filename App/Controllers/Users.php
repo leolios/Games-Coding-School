@@ -105,10 +105,18 @@ class Users extends Common
         $result = $user_model->login();
         if (!is_string($result)) $_SESSION['user'] = $result;
         if (!is_string($result)) $_SESSION['language'] = $result->getLang();
-        return self::getLogin((is_string($result)) ?
+        $params = (is_string($result)) ?
             ["error" => $this->lang->getTranslation($result)] :
-            ["success" => $this->lang->getTranslation(["connected"])]
-        );
+            ["success" => $this->lang->getTranslation(["connected"])];
+        if (!is_string($result)) {
+            self::getLogin($params);
+            sleep(3);
+            echo "<script>window.location.href = '/profil/" . $result->getId() . "'</script>";
+            return;
+        } else {
+            self::getLogin($params);
+            return;
+        }
     }
 
     /**

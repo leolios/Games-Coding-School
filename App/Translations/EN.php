@@ -71,7 +71,9 @@ class EN extends Language
         "back" => "back",
         "to" => "to",
         "list" => "the list",
-        "role" => "role"
+        "role" => "role",
+        "homeSubTitle" => "on the Games Coding School",
+        "homeTitleParagraphe" => "the web site that will teach you to code with different games.<br> So what are you waiting for to get started?"
     ];
 
     /**

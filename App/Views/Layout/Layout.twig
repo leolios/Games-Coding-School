@@ -24,7 +24,7 @@
 <!DOCTYPE html>
 <html>
 {{ include("Layout/head.twig") }}
-<body>
+<body class="{{ (not sidebar) ? "g-sidenav-show g-sidenav-pinned" }}">
 <!-- Sidebar -->
 {% if sidebar %}
     {{ include("Layout/sidebar.twig") }}
@@ -33,21 +33,23 @@
 <!-- Main content -->
 <div class="main-content" id="panel">
     <!-- NavBar -->
-    {% if navbar %}
-        {{ include("Layout/navbar.twig") }}
+    {% if navbar and not sidebar %}
+        {{ include("Layout/navbarWithoutSidebar.twig") }}
     {% endif %}
     <!-- End Navbar -->
-    <div class="header bg-primary pb-6">
-        <div class="container-fluid">
-            <div class="header-body">
-                <div class="row align-items-center py-4">
-                    <div class="col-lg-6 col-7">
-                        <h6 class="h2 text-white d-inline-block mb-0">{{ title|capitalize }}</h6>
+    {% block header %}
+        <div class="header bg-primary pb-6">
+            <div class="container-fluid">
+                <div class="header-body">
+                    <div class="row align-items-center py-4">
+                        <div class="col-lg-6 col-7">
+                            <h6 class="h2 text-white d-inline-block mb-0">{{ title|capitalize }}</h6>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% endblock %}
     <div class="container-fluid mt--6">
         {% block content %}
         {% endblock %}
