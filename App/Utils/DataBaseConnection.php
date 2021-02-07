@@ -122,7 +122,7 @@ abstract class DataBaseConnection
                     $sql .= " `$key` = :$key,";
                 endif;
             else:
-                $sql .= "`$key` = :$key WHERE id = :id";
+                $sql .= " `$key` = :$key WHERE id = :id";
             endif;
         endforeach;
         foreach ($array as $key => $value):
@@ -175,8 +175,8 @@ abstract class DataBaseConnection
     function delete(object $OBJECT): Exception|bool|null
     {
         $id = $OBJECT->getId();
-        $get = $this->DB->prepare("DELETE FROM `" . $OBJECT::TABLE_NAME . "` WHERE `id`=:1;");
-        $get->bindParam(":1", $id, PDO::PARAM_INT);
+        $get = $this->DB->prepare("DELETE FROM `" . $OBJECT::TABLE_NAME . "` WHERE `id`=:id;");
+        $get->bindParam(":id", $id);
         return $get->execute();
     }
 

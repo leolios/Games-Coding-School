@@ -156,8 +156,8 @@ class Users extends Common
     public function updateLang()
     {
         $_SESSION['language'] = $_POST["lang"];
-        $_SESSION["user"]->setLang($_POST["lang"]);
         $model = new UserModel();
+        $_SESSION['user']->setLang($_POST["lang"]);
         $model->update($_SESSION['user']);
         Utils::redirect('/settings');
     }
@@ -182,6 +182,27 @@ class Users extends Common
                 self::getProfils($uuid);
                 break;
         endswitch;
+    }
+
+    public function update(array $info)
+    {
+        if (!empty($info["password"])):
+            if ($info["password"] == $info["confPassword"]):
+                $password = password_hash($info["password"], PASSWORD_DEFAULT);
+                $_SESSION['user']->setPassword($password);
+            endif;
+        endif;
+        if (!empty($info["username"])):
+            $_SESSION['user']->setUsername($info["username"]);
+        endif;
+        if (!empty($info['email'])):
+            $_SESSION['user']->setEmail($info["email"]);
+        endif;
+
+        $model = new UserModel();
+        $model->update($_SESSION["user"]);
+
+        Utils::redirect("/settings");
     }
 
 }

@@ -12,7 +12,8 @@
   "require": {
     "altorouter/altorouter": "^2.0",
     "twig/twig": "^3.2",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "twig/string-extra": "^3.2"
   },
   "autoload": {
     "classmap": [

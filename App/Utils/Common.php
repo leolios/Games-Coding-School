@@ -33,6 +33,7 @@ use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
+use Twig\Extra\String\StringExtension;
 use Twig\Loader\FilesystemLoader;
 
 /**
@@ -85,10 +86,13 @@ abstract class Common
         $params["navbar"] = $navbar;
         $params["lang"] = self::getLang();
         //Load Page
+        $twig->addGlobal('_get', $_GET);
+        $twig->addGlobal('_post', $_POST);
         $filter = new \Twig\TwigFilter('md5', function (string $string) {
             return md5($string);
         });
         $twig->addFilter($filter);
+        $twig->addExtension(new StringExtension());
         $page = $twig->load($templatePath);
 
         //Show Page

@@ -8,7 +8,7 @@
                         <span class="input-group-text"><i class="fas fa-user"></i></span>
                     </div>
                     <input class="form-control" placeholder="{{ lang.getTranslation(["your", "username"])|capitalize }}"
-                           type="text" name="username" required>
+                           type="text" name="username" required {% if(_post.username is defined) %} value="{{ _post.username }}" {% endif %}>
                 </div>
             </div>
         </div>
@@ -19,7 +19,7 @@
                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                     </div>
                     <input class="form-control" placeholder="{{ lang.getTranslation(["your", "email"])|capitalize }}"
-                           type="email" name="email" required>
+                           type="email" name="email" required {% if(_post.email is defined) %} value="{{ _post.email }}" {% endif %}>
                 </div>
             </div>
         </div>

@@ -72,13 +72,17 @@ class FR extends Language
         "to" => "a",
         "list" => "la liste",
         "role" => "role",
-        "homeSubTitle"=>"sur la Games Coding School",
+        "homeSubTitle" => "sur la Games Coding School",
         "homeTitleParagraphe" => "le site qui va vous apprendre à coder avec différent jeux.<br> Alors qu'es ce que tu attends pour te lancer ?",
         "admin" => "administration",
         "backToSite" => "retour au site",
         "userCount" => "compte des utilisateurs",
         "levelCount" => "compte des niveaux",
-        "categories" => "categories"
+        "categories" => "categories",
+        "dashboard" => "tableau de bord",
+        "cancel" => "annuler",
+        "confirm" => "confirmation",
+        "supressItem" => "voulez-vous supprimer cette item ?"
     ];
 
     /**

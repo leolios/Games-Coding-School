@@ -78,7 +78,11 @@ class EN extends Language
         "backToSite" => "back to web site",
         "userCount" => "users counts",
         "levelCount" => "levels counts",
-        "categories" => "categories"
+        "categories" => "categories",
+        "dashboard" => "dashboard",
+        "cancel" => "cancel",
+        "confirm" => "confirm",
+        "supressItem" => "do you want to remove these item?"
     ];
 
     /**
