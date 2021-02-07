@@ -296,7 +296,7 @@ module Jekyll
       collections.each do |label, collection|
         collection.docs.each do |document|
           if regenerator.regenerate?(document)
-            document.output = Jekyll::Renderer.new(self, document, payload).redirect
+            document.output = Jekyll::Renderer.new(self, document, payload).run
           end
         end
       end

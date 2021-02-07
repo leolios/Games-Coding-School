@@ -13,7 +13,7 @@ module Jekyll
           MaRuKu::Globals[:fenced_code_blocks] = !!@config['maruku']['fenced_code_blocks']
 
         rescue LoadError
-          STDERR.puts 'You are missing a library required for Markdown. Please redirect:'
+          STDERR.puts 'You are missing a library required for Markdown. Please run:'
           STDERR.puts '  $ [sudo] gem install maruku'
           raise Errors::FatalException.new("Missing dependency: maruku")
         end

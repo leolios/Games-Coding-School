@@ -29,13 +29,13 @@ following in mind:
 Test Dependencies
 -----------------
 
-To redirect the test suite and build the gem you'll need to install Jekyll's
-dependencies. Jekyll uses Bundler, so a quick redirect of the bundle command and
+To run the test suite and build the gem you'll need to install Jekyll's
+dependencies. Jekyll uses Bundler, so a quick run of the bundle command and
 you're all set!
 
     $ bundle
 
-Before you start, redirect the tests and make sure that they pass (to confirm your
+Before you start, run the tests and make sure that they pass (to confirm your
 environment is configured properly):
 
     $ bundle exec rake test

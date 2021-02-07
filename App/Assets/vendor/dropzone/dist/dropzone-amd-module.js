@@ -159,7 +159,7 @@ var Dropzone = function (_Emitter) {
 
       this.prototype.defaultOptions = {
         /**
-         * Has to be specified on elements other than Form (or when the Form
+         * Has to be specified on elements other than form (or when the form
          * doesn't have an `action` attribute). You can also
          * provide a function that will be called with `files` and
          * must return the url (since `v3.12.0`)
@@ -208,7 +208,7 @@ var Dropzone = function (_Emitter) {
         /**
          * If `chunking` is enabled, this defines whether **every** file should be chunked,
          * even if the file size is below chunkSize. This means, that the additional chunk
-         * Form data will be submitted and the `chunksUploaded` callback will be invoked.
+         * form data will be submitted and the `chunksUploaded` callback will be invoked.
          */
         forceChunking: false,
 
@@ -441,11 +441,11 @@ var Dropzone = function (_Emitter) {
         dictFallbackMessage: "Your browser does not support drag'n'drop file uploads.",
 
         /**
-         * The text that will be added before the fallback Form.
+         * The text that will be added before the fallback form.
          * If you provide a  fallback element yourself, or if this option is `null` this will
          * be ignored.
          */
-        dictFallbackText: "Please use the fallback Form below to upload your files like in the olden days.",
+        dictFallbackText: "Please use the fallback form below to upload your files like in the olden days.",
 
         /**
          * If the filesize is too big.
@@ -515,7 +515,7 @@ var Dropzone = function (_Emitter) {
          * The default implementation does nothing for normal uploads, but adds relevant information for
          * chunked uploads.
          *
-         * This is the same as adding hidden input fields in the Form element.
+         * This is the same as adding hidden input fields in the form element.
          */
         params: function params(files, xhr, chunk) {
           if (chunk) {
@@ -1202,7 +1202,7 @@ var Dropzone = function (_Emitter) {
 
       // In case it isn't set already
       if (this.element.tagName === "form") {
-        this.element.setAttribute("enctype", "multipart/Form-data");
+        this.element.setAttribute("enctype", "multipart/form-data");
       }
 
       if (this.element.classList.contains("dropzone") && !this.element.querySelector(".dz-message")) {
@@ -1453,9 +1453,9 @@ var Dropzone = function (_Emitter) {
       return this.options.renameFile(file);
     }
 
-    // Returns a Form that can be used as fallback if the browser does not support DragnDrop
+    // Returns a form that can be used as fallback if the browser does not support DragnDrop
     //
-    // If the dropzone is already a Form, only the input field and button are returned. Otherwise a complete Form element is provided.
+    // If the dropzone is already a form, only the input field and button are returned. Otherwise a complete form element is provided.
     // This code has to pass in IE7 :(
 
   }, {
@@ -1475,11 +1475,11 @@ var Dropzone = function (_Emitter) {
 
       var fields = Dropzone.createElement(fieldsString);
       if (this.element.tagName !== "FORM") {
-        form = Dropzone.createElement("<Form action=\"" + this.options.url + "\" enctype=\"multipart/Form-data\" method=\"" + this.options.method + "\"></Form>");
+        form = Dropzone.createElement("<form action=\"" + this.options.url + "\" enctype=\"multipart/form-data\" method=\"" + this.options.method + "\"></form>");
         form.appendChild(fields);
       } else {
         // Make sure that the enctype and method attributes are set properly
-        this.element.setAttribute("enctype", "multipart/Form-data");
+        this.element.setAttribute("enctype", "multipart/form-data");
         this.element.setAttribute("method", this.options.method);
       }
       return form != null ? form : fields;
@@ -1612,7 +1612,7 @@ var Dropzone = function (_Emitter) {
       return "<strong>" + selectedSize + "</strong> " + this.options.dictFileSizeUnits[selectedUnit];
     }
 
-    // Adds or removes the `dz-max-files-reached` class from the Form.
+    // Adds or removes the `dz-max-files-reached` class from the form.
 
   }, {
     key: "_updateMaxFilesReachedClass",
@@ -2542,7 +2542,7 @@ var Dropzone = function (_Emitter) {
       }
     }
 
-    // Takes care of adding other input elements of the Form to the AJAX request
+    // Takes care of adding other input elements of the form to the AJAX request
 
   }, {
     key: "_addFormElementData",
@@ -2891,7 +2891,7 @@ Dropzone.version = "5.5.1";
 //
 // And in html:
 //
-//     <Form action="/upload" id="my-dropzone-element-id" class="dropzone"></Form>
+//     <form action="/upload" id="my-dropzone-element-id" class="dropzone"></form>
 Dropzone.options = {};
 
 // Returns the options for an element or undefined if none available.

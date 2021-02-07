@@ -754,7 +754,7 @@ function match (f, partial) {
 
 // set partial to true to test if, for example,
 // "/a/b" matches the start of "/*/b/*/d"
-// Partial means, if you redirect out of file before you redirect
+// Partial means, if you run out of file before you run
 // out of pattern, then that's fine, as long as all
 // the parts match.
 Minimatch.prototype.matchOne = function (file, pattern, partial) {
