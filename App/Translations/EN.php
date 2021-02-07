@@ -32,6 +32,7 @@ use JetBrains\PhpStorm\Pure;
 class EN extends Language
 {
     const lang = [
+        "lang" => "en",
         "home" => "Home",
         "login" => "login",
         "register" => "register",
@@ -57,7 +58,27 @@ class EN extends Language
         "emailAllreadyUsed" => "email already used",
         "pseudoAllreadyUsed" => "Username already used",
         "invalidLogin" => "Incorrect username, email or password",
-        "connected" => "You are connected"
+        "connected" => "You are connected",
+        "welcome" => "welcome",
+        "my" => "My",
+        "settings" => "settings",
+        "logout" => "logout",
+        "infoUser" => "Informations",
+        "language" => "language",
+        "update" => "update",
+        "level" => "levels",
+        "pp" => "profil's picture",
+        "back" => "back",
+        "to" => "to",
+        "list" => "the list",
+        "role" => "role",
+        "homeSubTitle" => "on the Games Coding School",
+        "homeTitleParagraphe" => "the web site that will teach you to code with different games.<br> So what are you waiting for to get started?",
+        "admin" => "admin",
+        "backToSite" => "back to web site",
+        "userCount" => "users counts",
+        "levelCount" => "levels counts",
+        "categories" => "categories"
     ];
 
     /**

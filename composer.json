@@ -18,5 +18,7 @@
     "classmap": [
       "./App/"
     ]
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }

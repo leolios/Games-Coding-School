@@ -2676,7 +2676,7 @@
       escape: function() {
         this.hide();
       },
-      //tab: function (widget) { //this break the flow of the Form. disabling for now
+      //tab: function (widget) { //this break the flow of the form. disabling for now
       //    var toggle = widget.find('.picker-switch a[data-action="togglePicker"]');
       //    if(toggle.length > 0) toggle.click();
       //},

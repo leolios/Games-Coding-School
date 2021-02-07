@@ -31,6 +31,7 @@ use App\Translations\EN;
 use App\Translations\FR;
 use App\Utils\Common;
 use \App\Models\Users as UserModel;
+use App\Utils\Utils;
 
 /**
  * Class Users
@@ -105,10 +106,18 @@ class Users extends Common
         $result = $user_model->login();
         if (!is_string($result)) $_SESSION['user'] = $result;
         if (!is_string($result)) $_SESSION['language'] = $result->getLang();
-        return self::getLogin((is_string($result)) ?
+        $params = (is_string($result)) ?
             ["error" => $this->lang->getTranslation($result)] :
-            ["success" => $this->lang->getTranslation(["connected"])]
-        );
+            ["success" => $this->lang->getTranslation(["connected"])];
+        if (!is_string($result)) {
+            self::getLogin($params);
+            sleep(3);
+            Utils::redirect('/profil/' . $result->getId());
+            return;
+        } else {
+            self::getLogin($params);
+            return;
+        }
     }
 
     /**
@@ -116,8 +125,41 @@ class Users extends Common
      */
     public function getProfils(string|null $uuid = null)
     {
+        $model = new UserModel();
         parent::setPageTitle($this->lang->getTranslation("user") . " | " . $this->lang->getTranslation("profils"));
+        if (!is_null($uuid)) {
+            $model->user_schema->setId($uuid);
+            $profil = $model->getOne($model->user_schema);
+            $pp = md5(strtolower(trim($profil->getEmail())));
+            parent::getView(templatePath: "Users/single.twig", params: ["profil" => $profil, "pp" => $pp], navbar: true);
+        } else {
+            $profils = $model->getAll($model->user_schema);
+            parent::getView(templatePath: "Users/list.twig", params: ["profils" => $profils], navbar: true);
+        }
         return;
+    }
+
+    /**
+     * @param array|null $params
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function getSettings(array|null $params = null)
+    {
+        $user = $_SESSION["user"];
+        parent::setPageTitle($this->lang->getTranslation("settings") . " | " . $user->getUsername());
+        parent::getView(templatePath: "Users/settings.twig", params: $params, navbar: true);
+        return;
+    }
+
+    public function updateLang()
+    {
+        $_SESSION['language'] = $_POST["lang"];
+        $_SESSION["user"]->setLang($_POST["lang"]);
+        $model = new UserModel();
+        $model->update($_SESSION['user']);
+        Utils::redirect('/settings');
     }
 
     /**
@@ -132,6 +174,9 @@ class Users extends Common
                 break;
             case 'register':
                 self::getRegister();
+                break;
+            case 'setting':
+                self::getSettings();
                 break;
             default:
                 self::getProfils($uuid);

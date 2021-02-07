@@ -1,4 +1,4 @@
-<nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+<nav class="{{ (not sidebar) ? "navbar navbar-horizontal navbar-main navbar-expand-lg navbar-dark bg-primary" : "navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom" }}">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Navbar links -->
@@ -37,37 +37,35 @@
                            aria-expanded="false">
                             <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="{{ assets }}/img/theme/team-4.jpg">
+                    <img alt="Image placeholder" src="https://www.gravatar.com/avatar/{{ hashMD5 }}?d=mp">
                   </span>
                                 <div class="media-body  ml-2  d-none d-lg-block">
-                                    <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
+                                    <span class="mb-0 text-sm  font-weight-bold">{{ user.getUsername()|capitalize }}</span>
                                 </div>
                             </div>
                         </a>
                         <div class="dropdown-menu  dropdown-menu-right ">
                             <div class="dropdown-header noti-title">
-                                <h6 class="text-overflow m-0">Welcome!</h6>
+                                <h6 class="text-overflow m-0">{{ lang.getTranslation("welcome")|capitalize }}!</h6>
                             </div>
-                            <a href="#!" class="dropdown-item">
+                            <a href="/profil/{{ user.getId() }}" class="dropdown-item">
                                 <i class="ni ni-single-02"></i>
-                                <span>My profile</span>
+                                <span>{{ lang.getTranslation(["my", "profil"])|capitalize }}</span>
                             </a>
-                            <a href="#!" class="dropdown-item">
+                            <a href="/settings" class="dropdown-item">
                                 <i class="ni ni-settings-gear-65"></i>
-                                <span>Settings</span>
-                            </a>
-                            <a href="#!" class="dropdown-item">
-                                <i class="ni ni-calendar-grid-58"></i>
-                                <span>Activity</span>
-                            </a>
-                            <a href="#!" class="dropdown-item">
-                                <i class="ni ni-support-16"></i>
-                                <span>Support</span>
+                                <span>{{ lang.getTranslation("settings")|capitalize }}</span>
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="#!" class="dropdown-item">
+                            {% if isAdmin %}
+                                <a href="/admin" class="dropdown-item">
+                                    <i class="ni ni-ui-04 text-danger"></i>
+                                    <span>{{ lang.getTranslation("admin")|capitalize }}</span>
+                                </a>
+                            {% endif %}
+                            <a href="/logout" class="dropdown-item">
                                 <i class="ni ni-user-run"></i>
-                                <span>Logout</span>
+                                <span>{{ lang.getTranslation("logout")|capitalize }}</span>
                             </a>
                         </div>
                     </li>

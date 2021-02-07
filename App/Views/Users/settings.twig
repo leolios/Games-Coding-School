@@ -1,0 +1,12 @@
+{% extends "/Layout/Layout.twig" %}
+
+{% block content %}
+    {% set cardHeader = lang.getTranslation("settings") %}
+    {% set cardBody = include("Form/settings.twig") %}
+
+    {% import "Macros/card.twig" as card %}
+    {{ card.div(cardHeader, cardBody, "", 6) }}
+{% endblock %}
+{% block script %}
+    <script src="{{ assets }}/js/togglePassword.js"></script>
+{% endblock %}
