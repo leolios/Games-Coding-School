@@ -163,6 +163,29 @@ class Users extends Common
     }
 
     /**
+     * @param array|null $params
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function getSettings(array|null $params = null)
+    {
+        $user = $_SESSION["user"];
+        parent::setPageTitle($this->lang->getTranslation("settings") . " | " . $user->getUsername());
+        parent::getView(templatePath: "Users/settings.twig", params: $params, navbar: true);
+        return;
+    }
+
+    public function updateLang()
+    {
+        $_SESSION['language'] = $_POST["lang"];
+        $_SESSION["user"]->setLang($_POST["lang"]);
+        $model = new UserModel();
+        $model->update($_SESSION['user']);
+        Utils::redirect('/settings');
+    }
+
+    /**
      * @param string|null $page
      * @param string|null $uuid
      */

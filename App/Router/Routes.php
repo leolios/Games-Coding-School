@@ -64,6 +64,7 @@ class Routes
         $userController = new Users();
         $dashboardController = new Dashboard();
         $user_adminController = new userAdmin();
+        $adminController = new Dashboard();
 
         $this->router->map('GET', '/', function () use ($homeController) { return $homeController->show(); }, 'Home');
 
@@ -79,6 +80,7 @@ class Routes
             $this->router->map('GET', '/settings', function () use ($userController) { return $userController->show('setting'); }, 'settings');
             $this->router->map('POST', '/settings', function () use ($userController) { return $userController->update($_POST); }, 'update_information');
             $this->router->map('POST', '/settings/lang', function () use ($userController) { return $userController->updateLang(); }, 'update_lang');
+            $this->router->map('POST', '/settings/lang', function () use ($userController) { return $userController->updateLang(); }, 'updateLang');
             $this->router->map('GET', '/logout', function () {
                 session_destroy();
                 Utils::redirect('/login');
@@ -91,6 +93,7 @@ class Routes
             $this->router->map('POST', '/admin/users/update/[*:uuid]', function ($uuid) use ($user_adminController) { return $user_adminController->updateUser($_POST, $uuid); }, 'admin_users_update');
             $this->router->map('GET', '/admin/levels', function () use ($dashboardController) { return $dashboardController->show(); }, 'admin_levels');
             $this->router->map('GET', '/admin/levels_cat', function () use ($dashboardController) { return $dashboardController->show(); }, 'admin_levels_cat');
+            $this->router->map('GET', '/admin', function () use ($adminController) { return $adminController->show(); }, 'dashboard');
         endif;
 
         $this->router->map('POST', "/register", function () use ($userController) {
