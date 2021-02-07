@@ -30,7 +30,7 @@ module Jekyll
     ## DAT RENDER THO
     ######################
 
-    def run
+    def redirect
       payload = Utils.deep_merge_hashes({
         "page" => document.to_liquid
       }, site_payload || site.site_payload)

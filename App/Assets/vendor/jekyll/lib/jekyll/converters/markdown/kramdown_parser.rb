@@ -6,7 +6,7 @@ module Jekyll
           require 'kramdown'
           @config = config
         rescue LoadError
-          STDERR.puts 'You are missing a library required for Markdown. Please run:'
+          STDERR.puts 'You are missing a library required for Markdown. Please redirect:'
           STDERR.puts '  $ [sudo] gem install kramdown'
           raise Errors::FatalException.new("Missing dependency: kramdown")
         end

@@ -57,6 +57,12 @@
                                 <span>{{ lang.getTranslation("settings")|capitalize }}</span>
                             </a>
                             <div class="dropdown-divider"></div>
+                            {% if isAdmin %}
+                                <a href="/admin" class="dropdown-item">
+                                    <i class="ni ni-ui-04 text-danger"></i>
+                                    <span>{{ lang.getTranslation("admin")|capitalize }}</span>
+                                </a>
+                            {% endif %}
                             <a href="/logout" class="dropdown-item">
                                 <i class="ni ni-user-run"></i>
                                 <span>{{ lang.getTranslation("logout")|capitalize }}</span>

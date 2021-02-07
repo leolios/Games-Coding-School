@@ -66,15 +66,29 @@ abstract class DataBaseConnection
 
     /**
      * @param object $OBJECT
-     * @return array|null
+     * @return array|bool
      * @author pault
      */
-    function getAll(object $OBJECT): ?array
+    function getAll(object $OBJECT): array|bool
     {
         $get = $this->DB->prepare("SELECT * FROM `" . $OBJECT::TABLE_NAME . "`;");
         $get->execute();
         $result = $get->fetchAll(PDO::FETCH_CLASS, get_class($OBJECT));
         return ($result) ? $result : false;
+    }
+
+    /**
+     * @param object $OBJECT
+     * @return int
+     */
+    function getCount(object $OBJECT): int
+    {
+        $objectArray = self::getAll($OBJECT);
+        if (is_array($objectArray)):
+            return count($objectArray);
+        else:
+            return 0;
+        endif;
     }
 
     /**

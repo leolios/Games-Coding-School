@@ -35,7 +35,8 @@
             <hr class="d-lg-none"/>
             <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                 <li class="nav-item">
-                    <a class="nav-link nav-link-icon" href="https://www.facebook.com/profile.php?id=100009296252090" target="_blank"
+                    <a class="nav-link nav-link-icon" href="https://www.facebook.com/profile.php?id=100009296252090"
+                       target="_blank"
                        data-toggle="tooltip" title="" data-original-title="Like us on Facebook">
                         <i class="fab fa-facebook-square"></i>
                         <span class="nav-link-inner--text d-lg-none">Facebook</span>
@@ -77,6 +78,12 @@
                                 <span>{{ lang.getTranslation("settings")|capitalize }}</span>
                             </a>
                             <div class="dropdown-divider"></div>
+                            {% if isAdmin %}
+                                <a href="/admin" class="dropdown-item">
+                                    <i class="ni ni-ui-04 text-danger"></i>
+                                    <span>{{ lang.getTranslation("admin")|capitalize }}</span>
+                                </a>
+                            {% endif %}
                             <a href="/logout" class="dropdown-item">
                                 <i class="ni ni-user-run"></i>
                                 <span>{{ lang.getTranslation("logout")|capitalize }}</span>

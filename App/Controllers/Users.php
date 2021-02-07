@@ -31,6 +31,7 @@ use App\Translations\EN;
 use App\Translations\FR;
 use App\Utils\Common;
 use \App\Models\Users as UserModel;
+use App\Utils\Utils;
 
 /**
  * Class Users
@@ -111,7 +112,7 @@ class Users extends Common
         if (!is_string($result)) {
             self::getLogin($params);
             sleep(3);
-            echo "<script>window.location.href = '/profil/" . $result->getId() . "'</script>";
+            Utils::redirect('/profil/' . $result->getId());
             return;
         } else {
             self::getLogin($params);
@@ -146,9 +147,6 @@ class Users extends Common
      */
     public function getSettings(array|null $params = null)
     {
-        if (!isset($_SESSION['user'])) {
-            echo "<script>window.location.href = '/login'</script>";
-        }
         $user = $_SESSION["user"];
         parent::setPageTitle($this->lang->getTranslation("settings") . " | " . $user->getUsername());
         parent::getView(templatePath: "Users/settings.twig", params: $params, navbar: true);
@@ -161,7 +159,7 @@ class Users extends Common
         $_SESSION["user"]->setLang($_POST["lang"]);
         $model = new UserModel();
         $model->update($_SESSION['user']);
-        echo "<script>window.location.href = '/settings'</script>";
+        Utils::redirect('/settings');
     }
 
     /**

@@ -50,7 +50,7 @@ application/x-cocoa                   cco
 application/x-chrome-extension        crx
 application/x-java-archive-diff       jardiff
 application/x-java-jnlp-file          jnlp
-application/x-makeself                run
+application/x-makeself                redirect
 application/x-ms-application          application
 application/x-ms-manifest             manifest
 application/x-ms-vsto                 vsto

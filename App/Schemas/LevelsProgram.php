@@ -27,9 +27,9 @@
 namespace App\Schemas;
 
 
-class LevelProgram
+class LevelsProgram
 {
-    const TABLE_NAME = "level_program";
+    const TABLE_NAME = "levels_program";
     public string $id_user;
     public string $id_level;
     public string $start_date;
@@ -57,6 +57,16 @@ class LevelProgram
     public function getIdLevel(): string
     {
         return $this->id_level;
+    }
+
+    /**
+     * @return object|null
+     */
+    public function getLevel(): object|null
+    {
+        $levels = new \App\Models\Levels();
+        $levels->levels_schema->setId(self::getIdLevel());
+        return $levels->getOne($levels->levels_schema);
     }
 
     /**

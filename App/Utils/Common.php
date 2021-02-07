@@ -78,8 +78,9 @@ abstract class Common
         // Add Parameters
         (is_null($params)) ? $params = ["title" => $this->pageTitle] : $params["title"] = $this->pageTitle;
         $params["assets"] = self::ASSETS;
-        if (isset($_SESSION['user'])) $params["user"] = $_SESSION["user"];
-        if (isset($_SESSION['user'])) $params["hashMD5"] = md5(strtolower(trim($_SESSION['user']->getEmail())));
+        if (Utils::isConnected()) $params["user"] = $_SESSION["user"];
+        if (Utils::isConnected()) $params["hashMD5"] = md5(strtolower(trim($_SESSION['user']->getEmail())));
+        $params["isAdmin"] = Utils::isAdmin();
         $params["sidebar"] = $sidebar;
         $params["navbar"] = $navbar;
         $params["lang"] = self::getLang();

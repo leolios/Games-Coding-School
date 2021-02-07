@@ -27,17 +27,37 @@
 namespace App\Utils;
 
 /**
- * Class Redirect
+ * Class Utils
  * @package App\Utils
  */
-class Redirect
+class Utils
 {
     /**
      * @param string $url
      */
-    public static function run(string $url): void
+    public static function redirect(string $url): void
     {
         echo "<script>window.location.href = '$url'</script>";
         return;
+    }
+
+    /**
+     * @return bool
+     */
+    public static function isAdmin(): bool
+    {
+        if (self::isConnected()):
+            return ($_SESSION['user']->getRole() == "admin");
+        else:
+            return false;
+        endif;
+    }
+
+    /**
+     * @return bool
+     */
+    public static function isConnected(): bool
+    {
+        return (isset($_SESSION['user']));
     }
 }

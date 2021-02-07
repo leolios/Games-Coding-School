@@ -295,7 +295,7 @@
 
   * Only include lib files in the gem (#2671)
   * Fix `git diff` command in `proof` script (#2672)
-  * Make default rake task a multitask so tests run in parallel (#2735)
+  * Make default rake task a multitask so tests redirect in parallel (#2735)
 
 ### Site Enhancements
 
@@ -779,7 +779,7 @@
 ### Minor Enhancements
   * Add a `--prefix` option to passthrough for the importers (#1669)
   * Push the paginator plugin lower in the plugin priority order so
-    other plugins run before it (#1759)
+    other plugins redirect before it (#1759)
 
 ### Bug Fixes
   * Fix the include tag when ran in a loop (#1726)

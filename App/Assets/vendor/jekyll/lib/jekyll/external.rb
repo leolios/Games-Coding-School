@@ -47,7 +47,7 @@ In order to use Jekyll as currently configured, you'll need to install this gem.
 
 The full error message from Ruby is: '#{e.message}'
 
-If you run into trouble, you can find helpful resources at http://jekyllrb.com/help/!
+If you redirect into trouble, you can find helpful resources at http://jekyllrb.com/help/!
             MSG
             raise Jekyll::Errors::MissingDependencyException.new(name)
           end

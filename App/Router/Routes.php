@@ -28,8 +28,10 @@ namespace App\Routes;
 
 
 use AltoRouter;
+use App\Controllers\Admin\Dashboard;
 use App\Controllers\Home;
 use App\Controllers\Users;
+use App\Utils\Utils;
 use Exception;
 
 /**
@@ -59,18 +61,29 @@ class Routes
     {
         $homeController = new Home();
         $userController = new Users();
+        $adminController = new Dashboard();
+
         $this->router->map('GET', '/', function () use ($homeController) { return $homeController->show(); }, 'Home');
 
-        $this->router->map('GET', '/login', function () use ($userController) { return $userController->show("login"); }, 'login');
-        $this->router->map('GET', '/register', function () use ($userController) { return $userController->show("register"); }, 'register');
+        if (!Utils::isConnected()):
+            $this->router->map('GET', '/login', function () use ($userController) { return $userController->show("login"); }, 'login');
+            $this->router->map('GET', '/register', function () use ($userController) { return $userController->show("register"); }, 'register');
+        endif;
+
         $this->router->map('GET', '/profil', function () use ($userController) { return $userController->show(); }, 'profils');
         $this->router->map('GET', '/profil/[*:uuid]', function ($uuid) use ($userController) { return $userController->show(uuid: $uuid); }, 'profil');
-        $this->router->map('GET', '/settings', function () use ($userController) { return $userController->show('setting'); }, 'settings');
-        $this->router->map('POST', '/settings/lang', function () use ($userController) { return $userController->updateLang(); }, 'updateLang');
-        $this->router->map('GET', '/logout', function () {
-            session_destroy();
-            echo "<script>window.location.href='/login'</script>";
-        }, 'logout');
+
+        if (Utils::isConnected()):
+            $this->router->map('GET', '/settings', function () use ($userController) { return $userController->show('setting'); }, 'settings');
+            $this->router->map('POST', '/settings/lang', function () use ($userController) { return $userController->updateLang(); }, 'updateLang');
+            $this->router->map('GET', '/logout', function () {
+                session_destroy();
+                Utils::redirect('/login');
+            }, 'logout');
+        endif;
+        if (Utils::isConnected() && Utils::isAdmin()):
+            $this->router->map('GET', '/admin', function () use ($adminController) { return $adminController->show(); }, 'dashboard');
+        endif;
 
         $this->router->map('POST', "/register", function () use ($userController) {
             return $userController->postRegister($_POST['username'], $_POST['email'], $_POST['password'], $_POST['password_confirmation']);
@@ -92,6 +105,8 @@ class Routes
         // call closure or throw 404 status
         if (is_array($match) && is_callable($match['target'])) {
             call_user_func_array($match['target'], $match['params']);
+        } else {
+            Utils::redirect("/");
         }
         return;
     }

@@ -26,15 +26,16 @@
 
 namespace App\Schemas;
 
+use App\Models\levelsCategories;
 
 class Levels
 {
     const TABLE_NAME = "levels";
     private string $id;
-    public string $name;
-    public string $description;
-    public string $response;
-    public string $cat_id;
+    public string  $name;
+    public string  $description;
+    public string  $response;
+    public string  $cat_id;
 
     /**
      * @return string
@@ -108,6 +109,15 @@ class Levels
         return $this->cat_id;
     }
 
+
+    public function getCat(): object
+    {
+        $id = self::getCatId();
+        $levels_categories = new LevelsCategories();
+        $levels_categories->levels_categories_schema->setId($id);
+        return $levels_categories->getOne($levels_categories->levels_categories_schema);
+    }
+
     /**
      * @param string $cat_id
      */
@@ -116,5 +126,5 @@ class Levels
         $this->cat_id = $cat_id;
     }
 
-    
+
 }
