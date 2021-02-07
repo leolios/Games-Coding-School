@@ -7,7 +7,7 @@ set -e
 
 if [[ "$1" != "-f" ]]; then
   git diff --name-only ..master | grep '^site/' || {
-    echo "No site files changed. We'll skip proofing. Run with -f to force."
+    echo "No site files changed. We'll skip proofing. redirect with -f to force."
     exit 0
   }
 fi
