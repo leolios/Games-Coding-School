@@ -55,7 +55,7 @@ class Utils
 
     public static function goBack()
     {
-        echo "window.history.back()";
+        echo "<script>window.history.back()</script>";
         return;
     }
 

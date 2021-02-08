@@ -5,9 +5,9 @@
         <div class="card-header border-0">
             <div class="row">
                 <div class="col-12">
-                    <h3 class="mb-0">{{ lang.getTranslation("profils")|capitalize }}
+                    <h3 class="mb-0">{{ lang.getTranslation("categories")|capitalize }}
                         <button class="btn btn-info float-right" data-toggle="modal"
-                                data-target="#modal-create">{{ lang.getTranslation(["create", "user"])|capitalize }}</button>
+                                data-target="#modal-create">{{ lang.getTranslation(["create", "categories"])|capitalize }}</button>
                     </h3>
                 </div>
             </div>
@@ -18,41 +18,36 @@
                 <thead class="thead-light">
                 <tr>
                     <th>#</th>
-                    <th>{{ lang.getTranslation(["pp", "and", "username"]) }}</th>
-                    <th>{{ lang.getTranslation("email") }}</th>
-                    <th>{{ lang.getTranslation("level") }}</th>
-                    <th>{{ lang.getTranslation("role") }}</th>
+                    <th>{{ lang.getTranslation("name") }}</th>
+                    <th>{{ lang.getTranslation("description") }}</th>
+                    <th>{{ lang.getTranslation("levelCount") }}</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for profil in profils|sort((a, b) => a.role <=> b.role) %}
+                {% for category in categories %}
                     <tr>
                         <td>
-                            <span class="text-muted">{{ profil.getId()|u.truncate(5) }}</span>
-                        </td>
-                        <td class="table-user">
-                            <img src="https://www.gravatar.com/avatar/{{ profil.getEmail()|md5 }}?d=mp"
-                                 class="avatar rounded-circle mr-3">
-                            <b>{{ profil.getUsername() }}</b>
+                            <span class="text-muted">{{ category.getId()|u.truncate(5) }}</span>
                         </td>
                         <td>
-                            <span class="text-muted">{{ profil.email() }}</span>
+                            <span class="text-muted">{{ category.getName() }}</span>
                         </td>
                         <td>
-                            <span class="text-muted">{{ profil.getLevel() }}</span>
+                            <span class="text-muted">{{ category.getDescription()|u.truncate(50, '...') }}</span>
                         </td>
-                        <td><span class="text-muted">{{ profil.getRole()|capitalize }}</span></td>
+                        <td>
+                            <span class="text-muted">{{ category.getLevelCount() }}</span>
+                        </td>
                         <td class="table-actions">
                             <a href="#modal-update"
-                               data-updateusername="{{ profil.getUsername() }}"
-                               data-upaterole="{{ profil.getRole() }}"
-                               data-updateid="{{ profil.getId() }}"
-                               data-updateemail="{{ profil.getEmail() }}"
-                               class="table-action" data-toggle="modal">
-                                <i class="fas fa-user-edit text-blue"></i>
+                               class="table-action" data-toggle="modal"
+                               data-updatename="{{ category.getName() }}"
+                               data-updatedescription="{{ category.getDescription() }}"
+                               data-updateid="{{ category.getId() }}">
+                                <i class="fas fa-edit text-blue"></i>
                             </a>
-                            <a href="#modal-delete" data-deleteid="{{ profil.getId() }}" class="table-action"
+                            <a href="#modal-delete" class="table-action" data-deleteid="{{ category.getId() }}"
                                data-toggle="modal">
                                 <i class="fas fa-trash text-red"></i>
                             </a>
@@ -98,14 +93,34 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h6 class="modal-title"
-                        id="modal-title-notification">{{ lang.getTranslation(["create", "user"])|capitalize }}</h6>
+                        id="modal-title-notification">{{ lang.getTranslation(["create", "categories"])|capitalize }}</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="py-3 text-center">
-                        {% include "Form/register.twig" %}
+                        <form action="/admin/levels_cat/create" method="post">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control name" placeholder="Name" name="name">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                    <textarea name="description" placeholder="description"
+                                              class="form-control description"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="submit" id="submit" class="btn btn-block btn-neutral"
+                                               value="{{ lang.getTranslation("create")|capitalize }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
 
                 </div>
@@ -123,59 +138,31 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h6 class="modal-title"
-                        id="modal-title-notification">{{ lang.getTranslation(["create", "user"])|capitalize }}</h6>
+                        id="modal-title-notification">{{ lang.getTranslation(["update", "categories"])|capitalize }}</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="py-3">
+                    <div class="py-3 text-center">
                         <form action="" method="post" class="link-update">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="input-group input-group-merge">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                            </div>
-                                            <input class="form-control username"
-                                                   placeholder="{{ lang.getTranslation(["username"])|capitalize }}"
-                                                   type="text" name="username" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="input-group input-group-merge">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                            </div>
-                                            <input class="form-control email"
-                                                   placeholder="{{ lang.getTranslation(["email"])|capitalize }}"
-                                                   type="email" name="email" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label"
-                                               for="role">{{ lang.getTranslation("role") }}</label>
-                                        <select class="form-control role" data-toggle="select"
-                                                data-minimum-results-for-search="Infinity" id="role"
-                                                name="role">
-                                            <option>Select role</option>
-                                            <option value="member">Member</option>
-                                            <option value="admin">Admin</option>
-                                        </select>
+                                        <input type="text" class="form-control name" placeholder="Name" name="name">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <input type="submit" class="btn btn-success"
-                                           value="{{ lang.getTranslation("update")|capitalize }}">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                    <textarea name="description" placeholder="description"
+                                              class="form-control description"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="submit" id="submit" class="btn btn-block btn-neutral"
+                                               value="{{ lang.getTranslation("update")|capitalize }}">
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -197,21 +184,18 @@
             let button = $(event.relatedTarget)
             let id = button.data('deleteid')
             let modal = $(this)
-            modal.find('.link-delete').attr("href", "/admin/users/delete/" + id)
+            modal.find('.link-delete').attr("href", "/admin/levels_cat/delete/" + id)
         })
         $('#modal-update').on('show.bs.modal', function (event) {
             let button = $(event.relatedTarget)
-            let email = button.data('updateemail')
-            let username = button.data('updateusername')
-            let role = button.data('upaterole')
+            let name = button.data('updatename')
+            let description = button.data('updatedescription')
             let id = button.data('updateid')
             let modal = $(this)
-            console.log(role)
 
-            modal.find('.link-update').attr("action", "/admin/users/update/" + id)
-            modal.find('.username').attr("value", username)
-            modal.find('.email').attr("value", email)
-            modal.find(`.role option[value="${role}"]`).prop('selected', true)
+            modal.find('.link-update').attr("action", "/admin/levels_cat/update/" + id)
+            modal.find('.name').attr("value", name)
+            modal.find('.description').html(description)
         })
     </script>
 {% endblock %}

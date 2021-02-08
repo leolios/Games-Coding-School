@@ -34,9 +34,9 @@ class Users
     public string  $username;
     public string  $email;
     public string  $password;
-    public int     $level = 0;
-    public string  $role  = "member";
-    public string  $lang  = "en";
+    public int     $level;
+    public string  $role;
+    public string  $lang;
 
     /**
      * @return string

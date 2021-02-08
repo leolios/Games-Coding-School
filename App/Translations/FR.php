@@ -37,11 +37,14 @@ class FR extends Language
         "login" => "connexion",
         "register" => "inscription",
         "user" => "utilisateur",
-        "Users" => "utilisateurs",
+        "users" => "utilisateurs",
         "profil" => "profile",
         "profils" => "profiles",
         "of" => "de",
         "form" => "formulaire",
+        "you" => "vous",
+        "willbe" => "allez être",
+        "redirect" => "rediriger",
         "your" => "votre",
         "username" => "nom d'utilisateur",
         "email" => "email",
@@ -53,7 +56,7 @@ class FR extends Language
         "noAccount" => "Je n'ai pas de compte",
         "isRequired" => "est requis",
         "passwordNotPasswordConfirm" => "Le mot de passe et la confirmation ne sont pas équal",
-        "create" => "à été créer",
+        "created" => "à été créer",
         "errorRegister" => "une erreur c'est produite lors de l'enregistrement",
         "emailAllreadyUsed" => "Email est déjà utilisé",
         "pseudoAllreadyUsed" => "Nom d'utilisateur déjà utilisé",
@@ -82,7 +85,11 @@ class FR extends Language
         "dashboard" => "tableau de bord",
         "cancel" => "annuler",
         "confirm" => "confirmation",
-        "supressItem" => "voulez-vous supprimer cette item ?"
+        "supressItem" => "voulez-vous supprimer cette item ?",
+        "and" => "et",
+        "create" => "créer",
+        "name" => "nom",
+        "description" => "description"
     ];
 
     /**

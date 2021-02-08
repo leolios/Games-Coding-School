@@ -31,9 +31,9 @@ class LevelsCategories
 {
     const TABLE_NAME = "levels_categories";
     private string $id;
-    public string  $name;
-    public string  $description;
-    private array  $level;
+    public string $name;
+    public string $description;
+    private array|string|null $level;
 
     /**
      * @return string
@@ -91,6 +91,17 @@ class LevelsCategories
         $levels = new \App\Models\Levels();
         $levels->getLevelByCat(self::getId());
         return $levels->getLevelByCat(self::getId());
+    }
+
+    /**
+     * @return int
+     */
+    public function getLevelCount(): int
+    {
+        $levels = new \App\Models\Levels();
+        $allLevels = $levels->getLevelByCat(self::getId());
+
+        return (is_array($allLevels)) ? count($allLevels) : 0;
     }
 
     /**

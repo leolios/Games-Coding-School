@@ -29,6 +29,7 @@ namespace App\Routes;
 
 use AltoRouter;
 use App\Controllers\Admin\Dashboard;
+use App\Controllers\Admin\LevelsCategories;
 use App\Controllers\Admin\Users as userAdmin;
 use App\Controllers\Home;
 use App\Controllers\Users;
@@ -64,35 +65,71 @@ class Routes
         $userController = new Users();
         $dashboardController = new Dashboard();
         $user_adminController = new userAdmin();
-        $adminController = new Dashboard();
+        $levels_categoriesController = new LevelsCategories();
 
-        $this->router->map('GET', '/', function () use ($homeController) { return $homeController->show(); }, 'Home');
+        $this->router->map('GET', '/', function () use ($homeController) {
+            return $homeController->show();
+        }, 'Home');
 
         if (!Utils::isConnected()):
-            $this->router->map('GET', '/login', function () use ($userController) { return $userController->show("login"); }, 'login');
-            $this->router->map('GET', '/register', function () use ($userController) { return $userController->show("register"); }, 'register');
+            $this->router->map('GET', '/login', function () use ($userController) {
+                return $userController->show("login");
+            }, 'login');
+            $this->router->map('GET', '/register', function () use ($userController) {
+                return $userController->show("register");
+            }, 'register');
         endif;
 
-        $this->router->map('GET', '/profil', function () use ($userController) { return $userController->show(); }, 'profils');
-        $this->router->map('GET', '/profil/[*:uuid]', function ($uuid) use ($userController) { return $userController->show(uuid: $uuid); }, 'profil');
+        $this->router->map('GET', '/profil', function () use ($userController) {
+            return $userController->show();
+        }, 'profils');
+        $this->router->map('GET', '/profil/[*:uuid]', function ($uuid) use ($userController) {
+            return $userController->show(uuid: $uuid);
+        }, 'profil');
 
         if (Utils::isConnected()):
-            $this->router->map('GET', '/settings', function () use ($userController) { return $userController->show('setting'); }, 'settings');
-            $this->router->map('POST', '/settings', function () use ($userController) { return $userController->update($_POST); }, 'update_information');
-            $this->router->map('POST', '/settings/lang', function () use ($userController) { return $userController->updateLang(); }, 'update_lang');
+            $this->router->map('GET', '/settings', function () use ($userController) {
+                return $userController->show('setting');
+            }, 'settings');
+            $this->router->map('POST', '/settings', function () use ($userController) {
+                return $userController->update($_POST);
+            }, 'update_information');
+            $this->router->map('POST', '/settings/lang', function () use ($userController) {
+                return $userController->updateLang();
+            }, 'update_lang');
             $this->router->map('GET', '/logout', function () {
                 session_destroy();
                 Utils::redirect('/login');
             }, 'logout');
         endif;
         if (Utils::isConnected() && Utils::isAdmin()):
-            $this->router->map('GET', '/admin', function () use ($dashboardController) { return $dashboardController->show(); }, 'dashboard');
-            $this->router->map('GET', '/admin/users', function () use ($user_adminController) { return $user_adminController->show(); }, 'admin_users');
-            $this->router->map('GET', '/admin/users/delete/[*:uuid]', function ($uuid) use ($user_adminController) { return $user_adminController->deleteUser($uuid); }, 'admin_users_delete');
-            $this->router->map('POST', '/admin/users/update/[*:uuid]', function ($uuid) use ($user_adminController) { return $user_adminController->updateUser($_POST, $uuid); }, 'admin_users_update');
-            $this->router->map('GET', '/admin/levels', function () use ($dashboardController) { return $dashboardController->show(); }, 'admin_levels');
-            $this->router->map('GET', '/admin/levels_cat', function () use ($dashboardController) { return $dashboardController->show(); }, 'admin_levels_cat');
-            $this->router->map('GET', '/admin', function () use ($adminController) { return $adminController->show(); }, 'dashboard');
+            $this->router->map('GET', '/admin', function () use ($dashboardController) {
+                return $dashboardController->show();
+            }, 'dashboard');
+            $this->router->map('GET', '/admin/users', function () use ($user_adminController) {
+                return $user_adminController->show();
+            }, 'admin_users');
+            $this->router->map('GET', '/admin/users/delete/[*:uuid]', function ($uuid) use ($user_adminController) {
+                return $user_adminController->deleteUser($uuid);
+            }, 'admin_users_delete');
+            $this->router->map('POST', '/admin/users/update/[*:uuid]', function ($uuid) use ($user_adminController) {
+                return $user_adminController->updateUser($_POST, $uuid);
+            }, 'admin_users_update');
+            $this->router->map('GET', '/admin/levels', function () use ($dashboardController) {
+                return $dashboardController->show();
+            }, 'admin_levels');
+            $this->router->map('GET', '/admin/levels_cat', function () use ($levels_categoriesController) {
+                return $levels_categoriesController->show();
+            }, 'admin_levels_cat');
+            $this->router->map('POST', '/admin/levels_cat/create', function () use ($levels_categoriesController) {
+                return $levels_categoriesController->create($_POST);
+            }, 'admin_levels_cat_create');
+            $this->router->map('POST', '/admin/levels_cat/update/[*:uuid]', function ($uuid) use ($levels_categoriesController) {
+                return $levels_categoriesController->update($uuid, $_POST);
+            }, 'admin_levels_cat_update');
+            $this->router->map('GET', '/admin/levels_cat/delete/[*:uuid]', function ($uuid) use ($levels_categoriesController) {
+                return $levels_categoriesController->delete($uuid);
+            }, 'admin_levels_cat_delete');
         endif;
 
         $this->router->map('POST', "/register", function () use ($userController) {

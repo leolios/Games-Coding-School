@@ -42,6 +42,9 @@ class EN extends Language
         "profils" => "profils",
         "email" => "email",
         "username" => "username",
+        "you" => "you",
+        "willbe" => "will be",
+        "redirect" => "redirect",
         "your" => "your",
         "of" => "of",
         "form" => "form",
@@ -53,7 +56,7 @@ class EN extends Language
         "noAccount" => "I do not have an account",
         "isRequired" => "is required",
         "passwordNotPasswordConfirm" => "Password and confirm is not equal",
-        "create" => "was created",
+        "created" => "was created",
         "errorRegister" => "an error occurred during registration",
         "emailAllreadyUsed" => "email already used",
         "pseudoAllreadyUsed" => "Username already used",
@@ -82,7 +85,11 @@ class EN extends Language
         "dashboard" => "dashboard",
         "cancel" => "cancel",
         "confirm" => "confirm",
-        "supressItem" => "do you want to remove these item?"
+        "supressItem" => "do you want to remove these item?",
+        "and" => "and",
+        "create" => "create",
+        "name" => "name",
+        "description" => "description"
     ];
 
     /**

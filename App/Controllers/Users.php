@@ -90,10 +90,18 @@ class Users extends Common
         $user_model->user_schema->setUsername($username);
         $user_model->user_schema->setEmail($email);
         $result = $user_model->register();
-        return self::getRegister((is_string($result)) ?
+        $params = (is_string($result)) ?
             ["error" => $this->lang->getTranslation($result)] :
-            ["success" => $this->lang->getTranslation(["user", "create"])]
-        );
+            ["success" => $this->lang->getTranslation(["user", "create", "you", "willbe", "redirect"])];
+        if (!is_string($result)) {
+            self::getRegister($params);
+            sleep(3);
+            Utils::goBack();
+            return;
+        } else {
+            self::getRegister($params);
+            return;
+        }
     }
 
     public function postLogin(string $login, string $password)
@@ -108,7 +116,7 @@ class Users extends Common
         if (!is_string($result)) $_SESSION['language'] = $result->getLang();
         $params = (is_string($result)) ?
             ["error" => $this->lang->getTranslation($result)] :
-            ["success" => $this->lang->getTranslation(["connected"])];
+            ["success" => $this->lang->getTranslation(["connected", "you", "willbe", "redirect"])];
         if (!is_string($result)) {
             self::getLogin($params);
             sleep(3);

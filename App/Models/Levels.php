@@ -29,6 +29,7 @@ namespace App\Models;
 
 use App\Schemas\Levels as Levels_Schema;
 use App\Utils\DataBaseConnection;
+use PDO;
 
 class Levels extends DataBaseConnection
 {
