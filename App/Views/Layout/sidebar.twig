@@ -56,6 +56,29 @@
                             </ul>
                         </div>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#navbar-classes" data-toggle="collapse" role="button"
+                           aria-expanded="false" aria-controls="navbar-classes">
+                            <i class="ni ni-ui-04 text-info"></i>
+                            <span class="nav-link-text">{{ lang.getTranslation("classes")|capitalize }}</span>
+                        </a>
+                        <div class="collapse" id="navbar-classes">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="/admin/classes_cat" class="nav-link">
+                                        <span class="sidenav-mini-icon"> {{ lang.getTranslation("categories")|capitalize|first }} </span>
+                                        <span class="sidenav-normal"> {{ lang.getTranslation("categories")|capitalize }} </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/admin/classes" class="nav-link">
+                                        <span class="sidenav-mini-icon"> {{ lang.getTranslation("classes")|capitalize|first }} </span>
+                                        <span class="sidenav-normal"> {{ lang.getTranslation("classes")|capitalize }} </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
                 <!-- Divider -->
                 <hr class="my-3">
